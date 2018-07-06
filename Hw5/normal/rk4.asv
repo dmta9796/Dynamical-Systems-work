@@ -1,0 +1,14 @@
+function [y] = rk4(f,t,h,x)
+%adaptive rk4 step finds step for h and two of h/2
+y=zeros(1:length(f));
+for i= 1:length(f)
+    k1=f(t(i),y(i));
+    k2=f(t(i),x(i)+h/2*k1);
+    k3=f(,x(i)+h/2*k2);
+    k4=f(,x(i)+h*k3);
+    y(i+1)=y(i)+(h/6)*(k1+2*k2+2*k3+k4);
+    if(i==1)
+        y(i)=mod(y(i),2*pi);
+    end
+end
+end

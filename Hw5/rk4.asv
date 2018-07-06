@@ -1,0 +1,30 @@
+function [fprime,] = rk4(f,t,h,x,tol)
+%rk4 ode solver with an input of a vector function
+fprime=zeros(length(f));
+fprime2=zeros(length(f));
+for i= 1:length(f)
+    k1=f{i}(t,x);
+    k2=f{i}(t+h/2,x+h/2);
+    k3=f{i}(t+h/2,x+h/2);
+    k4=f{i}(t+h,x+2);
+    fprime(i)=x(i)+(h/6)*(k1+2*k2+2*k3+k4);
+end
+h=h/2; % take smaller step
+for i= 1:length(f)
+    k1=f{i}(t,x);
+    k2=f{i}(t+h/2,x+h/2);
+    k3=f{i}(t+h/2,x+h/2);
+    k4=f{i}(t+h,x+2);
+    fprime(i)=x(i)+(h/6)*(k1+2*k2+2*k3+k4);
+        k1=f{i}(t,x);
+    k2=f{i}(t+h/2,x+h/2);
+    k3=f{i}(t+h/2,x+h/2);
+    k4=f{i}(t+h,x+2);
+    fprime2(i)=x(i)+(h/6)*(k1+2*k2+2*k3+k4);
+end
+err=norm(fprime,fprime2);
+if(err>tol)
+    rk4(f,t,h/2,x,tol)
+end
+
+end

@@ -1,0 +1,12 @@
+b=.3;
+a=1.4;
+x0=.2;
+y0=.3;
+iter=300;
+excl=150;
+astart=0;
+aend=1.4;
+ainterval=(1/500);
+Rindex=10;
+%bifurcationhenonmap(x0,y0,b,iter,astart,aend,ainterval,excl);
+henonmap(iter,excl,a,b,x0,y0);
